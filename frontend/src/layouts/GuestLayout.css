@@ -1,0 +1,23 @@
+.guest-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.guest-layout-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+@media (max-width: 600px) {
+  .guest-layout {
+    padding: 10px;
+  }
+
+  .guest-layout-container {
+    max-width: 100%;
+  }
+}

@@ -14,10 +14,7 @@ class TasksController extends Controller
     public function index(Request $request)
     {
         $tasks = $request->user()->tasks()->latest()->get();
-        return response()->json([
-            'message' => 'Tasks retrieved successfully',
-            'tasks' => $tasks,
-        ], 200);
+        return response()->json($tasks);
     }
 
     /**
@@ -32,10 +29,7 @@ class TasksController extends Controller
         ]);
 
         $task = $request->user()->tasks()->create($validated);
-        return response()->json([
-            'message' => 'Task created successfully',
-            'task' => $task,
-        ], 201);
+        return response()->json($task, 201);
     }
 
 
@@ -47,16 +41,13 @@ class TasksController extends Controller
         $this->authorize('update', $task);
 
         $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|nullable|string',
-            'status' => 'sometimes|required|string|in:pending,in_progress,done',
+            'title' => 'sometimes|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'sometimes||string|in:pending,in_progress,done',
         ]);
 
         $task->update($validated);
-        return response()->json([
-            'message' => 'Task updated successfully',
-            'task' => $task,
-        ], 200);
+        return response()->json($task);
     }
 
     /**
@@ -65,9 +56,8 @@ class TasksController extends Controller
     public function destroy(Task $task)
     {
         $this->authorize('delete', $task);
+
         $task->delete();
-        return response()->json([
-            'message' => 'Task deleted successfully',
-        ], 200);
+        return response()->json(['message' => 'Task deleted successfully']);
     }
 }

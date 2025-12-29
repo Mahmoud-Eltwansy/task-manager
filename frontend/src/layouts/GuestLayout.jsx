@@ -1,6 +1,7 @@
+import React from 'react';
 import './GuestLayout.css';
 
-function GuestLayout({children}) {
+function GuestLayout({ children }) {
     return (
         <div className="guest-layout">
             <div className="guest-layout-container">

@@ -1,0 +1,58 @@
+.task-list-wrapper {
+    width: 100%;
+}
+
+.task-list-error {
+    color: #dc3545;
+    padding: 15px 20px;
+    background-color: #ffe6e6;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 4px solid #dc3545;
+    font-weight: 500;
+}
+
+.loading-text {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.no-tasks {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.no-tasks-icon {
+    font-size: 64px;
+    margin: 0;
+    display: block;
+}
+
+.no-tasks-text {
+    margin: 20px 0 10px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.no-tasks-hint {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.tasks-grid {
+    display: grid;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .task-list-wrapper {
+        padding: 0;
+    }
+}

@@ -1,35 +1,35 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import './Register.css';
 import { useNavigate } from "react-router-dom";
-import { authApis } from "../../axiosClient";
-import GuestLayout from "../../layouts/GuestLayout";
+import { authAPI } from '../../api';
+import GuestLayout from '../../layouts/GuestLayout';
 
-function Register(){
-    const [name,setName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword]= useState('');
-    const [error,setError] = useState('');
-    const [loading,setLoading] = useState(false);
+function Register() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        setLoading(true)
+        setLoading(true);
 
-        try{
-            const response= await authApis.register({name,email,password});
-            localStorage.setItem('token',response.data.token);
-            localStorage.setItem('user',JSON.stringify(response.data.user));
+        try {
+            const response = await authAPI.register({ name, email, password });
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
             navigate('/tasks');
-        }catch(error){
-            setError(error.response?.data?.message || 'Registration Failed');
-        }finally{
+        } catch (err) {
+            setError(err.response?.data?.message || 'Registration failed');
+        } finally {
             setLoading(false);
         }
-
     };
+
 
     return (
         <GuestLayout>
@@ -43,41 +43,58 @@ function Register(){
                     <div className="form-group">
                         <label htmlFor="name">Full Name</label>
                         <input
-                        id="name"
-                        type="text"
-                        placeholder="Your Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className="register-input"
+                            id="name"
+                            type="text"
+                            placeholder="Your Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="register-input"
                         />
                     </div>
 
-                    <div className='form-group'>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" placeholder='test@email.com' value={email} onChange={(e)=> setEmail(e.target.value)} required className='login-input' />
+                    <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="your@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="register-input"
+                        />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" placeholder='password' value={password} onChange={(e)=> setPassword(e.target.value)} required className='login-input'/>
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="At least 8 characters"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="register-input"
+                        />
                     </div>
 
-                    <button 
-                    type="submit" 
-                    disabled={loading}
-                    className="register-button">
-                    {loading ? 'Creating account...' : 'Register'}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="register-button"
+                    >
+                        {loading ? 'Creating account...' : 'Register'}
                     </button>
                 </form>
 
                 <div className="register-footer">
-                    <p>Already have an account? 
+                    <p>Already have an account?
                         <a href="/login" className="register-link"> Login here</a>
                     </p>
                 </div>
             </div>
         </GuestLayout>
-    )
+    );
 }
 export default Register;

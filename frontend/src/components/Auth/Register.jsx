@@ -3,6 +3,7 @@ import './Register.css';
 import { useNavigate } from "react-router-dom";
 import { authAPI } from '../../api';
 import GuestLayout from '../../layouts/GuestLayout';
+import { Helmet } from 'react-helmet-async';
 
 function Register() {
     const [name, setName] = useState('');
@@ -33,6 +34,9 @@ function Register() {
 
     return (
         <GuestLayout>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
             <div className="register-form">
                 <h2>Create Account</h2>
                 <p className="register-subtitle">Join us and manage your tasks</p>

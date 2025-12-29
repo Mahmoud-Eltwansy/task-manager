@@ -4,6 +4,7 @@ import TaskForm from './TaskForm';
 import TaskItem from './TaskItem';
 import './TaskList.css';
 import { tasksAPI } from '../../api';
+import { Helmet } from 'react-helmet-async';
 
 function TaskList() {
     const [tasks, setTasks] = useState([]);
@@ -61,7 +62,12 @@ function TaskList() {
     }
 
     return (
+
+
         <DefaultLayout user={user}>
+            <Helmet>
+                <title>Task List</title>
+            </Helmet>
             <div className="task-list-wrapper">
                 {error && <div className="task-list-error">{error}</div>}
 

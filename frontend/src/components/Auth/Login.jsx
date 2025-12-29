@@ -3,7 +3,7 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../../api';
 import GuestLayout from '../../layouts/GuestLayout';
-
+import { Helmet } from 'react-helmet-async';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -32,6 +32,9 @@ function Login() {
 
     return (
         <GuestLayout>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className="login-form">
                 <h2>Welcome Back</h2>
                 <p className="login-subtitle">Login to your account</p>
